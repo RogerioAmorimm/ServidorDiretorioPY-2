@@ -1,7 +1,7 @@
 import rpyc
 import socket
 from const import * #-
-from rpyc.utils.server import ForkingServer
+from rpyc.utils.server import ThreadedServer
  
 class Pizzaria(rpyc.Service):
   value = []
@@ -29,7 +29,7 @@ class Pizzaria(rpyc.Service):
            
 if __name__ == "__main__":
   print(f"Criaando server Pizzaria") 
-  server = ForkingServer(Pizzaria, port = PORT)
+  server = ThreadedServer(Pizzaria, port = PORT)
   print(f"Conectando ao Server de diretório")  
   conn_serverDir = rpyc.connect(SERVERDIR,PORTDIR)
   print(f"Obtendo ipadress da Pizzaria")  

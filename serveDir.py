@@ -1,6 +1,6 @@
 from const import *
 import rpyc
-from rpyc.utils.server import ForkingServer
+from rpyc.utils.server import ThreadedServer
 
 
 class ServerDir(rpyc.Service):
@@ -53,5 +53,5 @@ class ServerDir(rpyc.Service):
 if __name__ == "__main__":
     ListaDir = {}
     print(f"Iniciando servidor de diretórios na porta: {PORTDIR}")
-    serverDir = ForkingServer(ServerDir(ListaDir), port=12307)
+    serverDir = ThreadedServer(ServerDir(ListaDir), port=12307)
     serverDir.start()
